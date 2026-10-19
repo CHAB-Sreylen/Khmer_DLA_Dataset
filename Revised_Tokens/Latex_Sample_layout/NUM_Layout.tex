@@ -1,0 +1,86 @@
+\documentclass[a4paper]{article}
+\usepackage[
+    top=2cm,
+    bottom=2cm,
+    left=2cm,
+    right=2cm
+]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx} 
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt
+\definecolor{TextBlue}{RGB}{42,83,100}
+\baselineskip=14pt
+\newcount\LineCount
+\def\CountLines{\vadjust{\global\advance\LineCount by 1}}
+
+\newfontfamily\NormalFont[
+    Path=fonts/,
+    Extension=.ttf
+]{KhmerMPTC}
+\newfontfamily\HeaderFont[
+    Path=fonts/,
+    Extension=.ttf
+]{KhmerMPTCMoul}
+
+\begin{document}
+
+{\HeaderFont
+\begin{flushright}
+\fontsize{12pt}{10pt}\selectfont %random from font: 12 -> 14 , baseline spacing: it measure between its to other : 10,15,20
+\textbf{ព្រះរាជាណាចក្រកម្ពុជា}\\
+\textbf{ជាតិ សាសនា ព្រះមហាក្សត្រ}
+\end{flushright}
+}
+
+\hspace*{0.5cm}  % random from 0,0.5,1,1.5,2
+\includegraphics[width=3cm]{Figures/Num_logo.png}  % random from 2,2.5,3
+
+\begin{flushleft}
+{\HeaderFont
+\fontsize{12pt}{14pt}\selectfont
+\textbf{ក្រសួងអប់រំ យុវជន និងកីឡា}\\
+\textbf{សាកលវិទ្យាល័យជាតិគ្រប់គ្រង}
+}  
+\end{flushleft}
+
+{\HeaderFont
+\begin{center}
+\fontsize{12pt}{24pt}\selectfont
+\textbf{សេចក្ដីជូនដំណឺង}\\
+\textbf{ស្ដីពី}\\
+\parbox{0.9\textwidth}{%
+\centering
+\textbf{ការបង់ថ្លៃសិក្សារបស់និស្សិតថ្នាក់បរិញ្ញាប័ត្រក្នុងឆមាសទី១ ឆ្នាំសិក្សា២០២៦-២០២៧}%
+}
+\end{center}
+}
+
+{\NormalFont
+\begin{justify}
+\setlength{\baselineskip}{20pt}
+\hspace{1cm}\input{Text/ITC_text}
+\end{justify}
+}
+
+{\NormalFont
+\begin{flushright}
+\fontsize{11pt}{13pt}\selectfont
+ថ្ងៃ​អង្គារ ១រោច​ខែបឋមសាឍ ឆ្នាំមមី អដសីក​ព.ស ២៥៧០
+\end{flushright}
+}
+
+\raggedleft
+{\NormalFont
+\fontsize{12pt}{24pt}\selectfont
+រាជធានីភ្នំពេញ ថ្ងៃ    ខែ    ឆ្នាំ២០២៤
+}
+
+\begin{flushright}
+\includegraphics[width=1.5in]{Figures/Stamp.png}
+\end{flushright}
+\end{document}

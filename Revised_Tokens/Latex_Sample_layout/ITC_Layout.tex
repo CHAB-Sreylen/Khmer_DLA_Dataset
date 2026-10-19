@@ -1,0 +1,116 @@
+\documentclass[a4paper]{article}
+\usepackage[
+    top=2cm,
+    bottom=2cm,
+    left=2cm,
+    right=2cm
+]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx} 
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt
+\definecolor{TextBlue}{RGB}{42,83,100}
+\baselineskip=14pt
+\newcount\LineCount
+\def\CountLines{\vadjust{\global\advance\LineCount by 1}}
+
+\newfontfamily\NormalFont[
+    Path=fonts/,
+    Extension=.ttf
+]{KhmerMPTC}
+\newfontfamily\HeaderFont[
+    Path=fonts/,
+    Extension=.ttf
+]{KhmerMPTCMoul}
+
+
+\begin{document}
+
+{\HeaderFont
+\begin{center}
+\fontsize{12pt}{10pt}\selectfont %random from font: 12 -> 14 , baseline spacing: it measure between its to other : 10,15,20
+\textbf{ព្រះរាជាណាចក្រកម្ពុជា}\\
+\textbf{ជាតិ សាសនា ព្រះមហាក្សត្រ}\\
+\includegraphics[width=2.5cm]{Figures/Tacteng.png} 
+
+\end{center}
+}
+
+\hspace*{0.5cm}  % random from 0,0.5,1,1.5,2
+\includegraphics[width=3cm]{Figures/ITC_logo.png}  % random from 2,2.5,3
+
+{\NormalFont
+\fontsize{12pt}{10pt}\selectfont  % random from font: 10,11,12 , baseline spacing: it measure between its to other : 10,15,20
+\textcolor{TextBlue}{\textbf{វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា}}
+}
+
+{\HeaderFont
+\begin{center}
+\fontsize{12pt}{10pt}\selectfont
+\textbf{សេចក្ដីប្រកាសព័ត៌មាន}\\
+\parbox{0.9\textwidth}{
+\centering
+\textbf{ស្តីពីវឌ្ឃនភាពនៃវិធានការរបស់វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជាពាក់ព័ន្ធនឹងករណីក្លែងបន្លំសញ្ញាបត្រ}%
+}
+\end{center}
+}
+
+
+
+
+{\NormalFont
+\begin{justify}
+\setlength{\baselineskip}{20pt}
+\hspace{1cm}\input{Text/ITC_text}
+\par
+\end{justify}
+}
+
+
+{\NormalFont
+\begin{flushright}
+\fontsize{11pt}{13pt}\selectfont
+ថ្ងៃ​អង្គារ ១រោច​ខែបឋមសាឍ ឆ្នាំមមី អដសីក​ព.ស ២៥៧០
+\end{flushright}
+}
+
+
+\raggedleft
+{\NormalFont
+\fontsize{12pt}{24pt}\selectfont
+រាជធានីភ្នំពេញ ថ្ងៃ    ខែ    ឆ្នាំ២០២៤
+}
+
+
+\begin{flushright}
+\includegraphics[width=1.5in]{Figures/Stamp.png}
+\end{flushright}
+
+% Footer
+% Footer
+\newcommand{\ornamentdivider}{%
+\begin{center}\begin{tikzpicture}
+\draw[thick] (-3,0)--(-.5,0) (.5,0)--(3,0);
+\foreach \x/\s in {-.3/.08,-.15/.12,0/.16,.15/.12,.3/.08}
+\draw[fill=black] (\x,0) circle(\s);
+\end{tikzpicture}\end{center}}
+
+\pagestyle{fancy}
+\setlength{\headheight}{0pt}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{.4pt}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{TextBlue}\leaders\hrule height\footrulewidth\hfill}}
+
+
+\fancyfoot[c]{
+\fontsize{10pt}{10pt}\NormalFont\color{TextBlue}\selectfont
+\begin{tabular}{l}
+មហាវិថី សហព័ន្ធរុស្សី ប្រអប់សំបុត្រ​៨៦​ភ្នំពេញ ព្រះរាជាណាចក្រ​- www.itc.edu.kh \\
+ទូរស័ព្ធ: (855) 23 880 370 ទូសោរ : (855) 23 880 269 Email: info@edu.kh
+\end{tabular}
+}
+\end{document}

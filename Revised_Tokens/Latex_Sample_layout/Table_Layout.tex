@@ -1,0 +1,83 @@
+\documentclass[a4paper]{article}
+
+\usepackage[
+    top=2cm,
+    bottom=2cm,
+    left=2cm,
+    right=2cm
+]{geometry}
+
+\usepackage{booktabs}   % nicer table rules
+\usepackage{array}      % for column formatting
+
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx} 
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt
+\definecolor{TextBlue}{RGB}{42,83,100}
+\baselineskip=14pt
+\newcount\LineCount
+\def\CountLines{\vadjust{\global\advance\LineCount by 1}}
+
+\newfontfamily\NormalFont[
+    Path=fonts/,
+    Extension=.ttf
+]{KhmerMPTC}
+\newfontfamily\HeaderFont[
+    Path=fonts/,
+    Extension=.ttf
+]{KhmerMPTCMoul}
+
+\begin{document}
+
+{\NormalFont
+\begin{justify}
+\setlength{\baselineskip}{20pt}
+\hspace{1cm}\input{Text/ITC_text}
+\end{justify}
+}
+\begin{center}
+    {\NormalFont \textbf{តារាងព័ត៌មាន}}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{table}[h!]
+    \centering
+    \NormalFont\selectfont
+    \begin{tabular}{|c|l|l|c|}
+        \hline
+        \textbf{លេខ.រ} & \textbf{ឈ្មោះបុគ្គលិក} & \textbf{មុខតំណែង} & \textbf{អាយុ} \\
+        \hline
+        ១ & ចាប សុភា & គ្រូបង្រៀន & ២៨ \\
+        \hline
+        ២ & សុខ ដារា & វិស្វករ & ៣២ \\
+        \hline
+        ៣ & ម៉ែន ចន្ទថា & គណនេយ្យករ & ២៥ \\
+        \hline
+    \end{tabular}
+    \caption{រាយនាមបុគ្គលិក}
+\end{table}
+
+\begin{table}[h!]
+    \NormalFont\selectfont
+    \begin{tabular}{|c|l|l|c|c}
+        \hline
+        \textbf{លេខ.រ} & \textbf{ឈ្មោះក្រុមហ៊ុនជាអក្សរឡាតាំង} & \textbf{គណនេយ្យករ} ​& \textbf{លេខអាជ្ញាបណ្ណ} \\
+        \hline
+        ១ & ៣អេស ខនសាល់ធីង ឯ.ក & 3S Consulting Co., Ltd. & លោកស្រី ស៊ុំ សុជាតិ \\
+        \hline
+        ២ & អេនឌ័រសែន អ៊ែតវាយហ្សរី ឯ.ក & Andersen Advisory Co., Ltd. & Mrs. Loi Jin Choo  \\
+        \hline
+        ៣ & ហាន់ហ្គោ ស៊ូជីតាក់ & អគ៍ខោនធីង (ខេមបូឌា) & Hongo Tsuji Tax Co., Ltd \\
+        \hline
+        
+    \end{tabular}
+    \caption{អាជ្ញាបណ្ណប្រកបវិជ្ជាជីវៈគណនេយ្យករថ្នាក់១}
+\end{table}
+
+\end{document}

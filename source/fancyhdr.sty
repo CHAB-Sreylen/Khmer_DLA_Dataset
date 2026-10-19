@@ -1,0 +1,95 @@
+\ProvidesPackage{fancyhdr}[2026/07/27 Mock fancyhdr for Khmer layouts]
+
+\newdimen\headwidth
+\headwidth=\textwidth
+
+\newcommand{\headrulewidth}{0pt}
+\newcommand{\footrulewidth}{0pt}
+
+% Storage macros for L, C, R headers and footers
+\newcommand{\fancy@headl}{}
+\newcommand{\fancy@headc}{}
+\newcommand{\fancy@headr}{}
+\newcommand{\fancy@footl}{}
+\newcommand{\fancy@footc}{}
+\newcommand{\fancy@footr}{}
+
+% Clear command
+\newcommand{\fancyhf}[1]{%
+  \renewcommand{\fancy@headl}{}%
+  \renewcommand{\fancy@headc}{}%
+  \renewcommand{\fancy@headr}{}%
+  \renewcommand{\fancy@footl}{}%
+  \renewcommand{\fancy@footc}{}%
+  \renewcommand{\fancy@footr}{}%
+}
+
+\newcommand{\fancy@parseopts}[2]{%
+  \fancy@parse@#1\fancy@nil{#2}%
+}
+
+\def\fancy@parse@#1#2\fancy@nil#3{%
+  \ifx#1c\renewcommand{\fancy@footc}{#3}\fi
+  \ifx#1C\renewcommand{\fancy@footc}{#3}\fi
+  \ifx#1l\renewcommand{\fancy@footl}{#3}\fi
+  \ifx#1L\renewcommand{\fancy@footl}{#3}\fi
+  \ifx#1r\renewcommand{\fancy@footr}{#3}\fi
+  \ifx#1R\renewcommand{\fancy@footr}{#3}\fi
+  \def\fancy@temp{#2}%
+  \ifx\fancy@temp\@empty\else
+    \fancy@parse@#2\fancy@nil{#3}%
+  \fi
+}
+
+\newcommand{\fancyhead}[2][]{%
+  \def\temp@opt{#1}%
+  \ifx\temp@opt\@empty
+    \renewcommand{\fancy@headc}{#2}%
+  \else
+    \fancy@parseopts{#1}{#2}%
+  \fi
+}
+
+\newcommand{\fancyfoot}[2][]{%
+  \def\temp@opt{#1}%
+  \ifx\temp@opt\@empty
+    \renewcommand{\fancy@footc}{#2}%
+  \else
+    \fancy@parseopts{#1}{#2}%
+  \fi
+}
+
+% Default rules
+\newcommand{\footrule}{%
+  \ifdim\footrulewidth>0pt
+    \vskip-\footrulewidth
+    \hrule height\footrulewidth width\headwidth
+    \vskip\footrulewidth
+  \fi
+}
+
+\newcommand{\headrule}{%
+  \ifdim\headrulewidth>0pt
+    \hrule height\headrulewidth width\headwidth
+  \fi
+}
+
+% Define the page style fancy
+\newcommand{\ps@fancy}{%
+  \renewcommand{\@oddhead}{%
+    \vbox{%
+      \hbox to\headwidth{\rlap{\fancy@headl}\hfill\fancy@headc\hfill\llap{\fancy@headr}}%
+      \vskip 2pt
+      \headrule
+    }%
+  }%
+  \renewcommand{\@evenhead}{\@oddhead}%
+  \renewcommand{\@oddfoot}{%
+    \vbox{%
+      \footrule
+      \vskip 2pt
+      \hbox to\headwidth{\rlap{\fancy@footl}\hfill\fancy@footc\hfill\llap{\fancy@footr}}%
+    }%
+  }%
+  \renewcommand{\@evenfoot}{\@oddfoot}%
+}
