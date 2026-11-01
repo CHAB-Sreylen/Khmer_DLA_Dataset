@@ -31,3 +31,8 @@ Thumbs.db
 
 # temp compile 
 **/temp_compile/
+
+# Local rendering runs and pre-integration backups (keep the original dataset)
+/Revised_Tokens/dataset_extended/
+/Revised_Tokens/dataset_render_*/
+/integration_backup_*/
