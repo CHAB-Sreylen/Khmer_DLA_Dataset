@@ -1,0 +1,263 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[
+  top=0.65cm,
+  bottom=1.55cm,
+  left=1.05cm,
+  right=1.05cm
+]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{tabularx}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\definecolor{RUFAInk}{RGB}{66,66,66}
+\definecolor{RUFASeal}{RGB}{137,75,73}
+\definecolor{PlaceholderGray}{RGB}{105,105,105}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=RUFAInk,
+  linkcolor=RUFAInk
+}
+
+\newfontfamily\NormalFont[
+  Path=fonts/,
+  Extension=.ttf,
+  BoldFont=KhmerMPTC,
+  BoldFeatures={FakeBold=2}
+]{KhmerMPTC}
+
+\newfontfamily\HeaderFont[
+  Path=fonts/,
+  Extension=.ttf
+]{KhmerMPTCMoul}
+
+\newlength{\DocumentContentWidth}
+\setlength{\DocumentContentWidth}{0.91\textwidth}
+\newcommand{\TitleLineOne}{លទ្ធផលសម្ភាសន៍និស្សិតទៅផ្លាស់ប្តូរបទពិសោធន៍សិក្សា}
+\newcommand{\TitleLineTwo}{នៅ Korea National University of Heritage}
+\newcommand{\TitleLineThree}{នៃសាធារណរដ្ឋកូរ៉េ (ចាប់ពី ខែកញ្ញា ដល់ ខែធ្នូ ឆ្នាំ២០២៦)}
+\newcommand{\TableNumberHeading}{ល.រ}
+\newcommand{\TableNameHeading}{ឈ្មោះ}
+\newcommand{\TableProgramHeading}{មហាវិទ្យាល័យ}
+\newcommand{\TableMajorHeading}{ជំនាញជ្រើសរើស}
+\newcommand{\TableResultHeading}{លទ្ធផល}
+\newcommand{\DocumentDateLineOne}{ថ្ងៃពុធ ៣រោច ខែជេស្ឋ ឆ្នាំមមី សម្ផស័ក ព.ស ២៥៧០}
+\newcommand{\DocumentDateLineTwo}{រាជធានីភ្នំពេញ ថ្ងៃទី........ ខែ........ ឆ្នាំ២០២៦}
+\newcommand{\ApprovalTitleLineOne}{បានឃើញ និងឯកភាព}
+\newcommand{\ApprovalTitleLineTwo}{សាកលវិទ្យាធិការ}
+\newcommand{\CommitteeTitle}{គណៈកម្មការផ្តល់ពិន្ទុ}
+\newcommand{\CommitteeMemberOne}{លោក យ៉ា ដា}
+\newcommand{\CommitteeMemberTwo}{លោក ស៊ុម ចាប់ផប}
+\newcommand{\CommitteeMemberThree}{លោកស្រី សំបូរ ម៉ានីកូ}
+\newcommand{\CommitteeMemberFour}{លោក សុខ ជាតិ}
+
+% footer.
+\newcommand{\FooterAddressKhmer}{%
+  អាសយដ្ឋាន៖ ផ្ទះលេខ៧២ ផ្លូវលេខ១៧៨ សង្កាត់ជ័យជំនះ ខណ្ឌដូនពេញ រាជធានីភ្នំពេញ
+}
+
+\newcommand{\RUFAResultRow}[6]{%
+  #1 &
+  \begin{minipage}[c]{\linewidth}
+    \raggedright
+    #2\\[-0.02cm]
+    {\sffamily\fontsize{8.5pt}{10.5pt}\selectfont #3}
+  \end{minipage} &
+  #4 &
+  {\sffamily\fontsize{8.5pt}{11pt}\selectfont #5} &
+  #6
+  \tabularnewline\hline%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\footskip}{1cm}
+
+\fancyfoot[C]{%
+  \NormalFont\color{RUFAInk}
+  \makebox[\textwidth][c]{%
+    \begin{minipage}{0.96\textwidth}
+      {\color{RUFAInk}\hrule height 0.4pt}
+      \vspace{0.04cm}
+      \centering
+      {\fontsize{6.8pt}{8.3pt}\selectfont
+        \FooterAddressKhmer\\
+        {\sffamily
+          \#72, Street 178 (Preah Ang Makvan), Sangkat Chey Chumneas,
+          Khan Daun Penh, Phnom Penh, Kingdom of Cambodia.\\
+          Tel / Fax: (855) 23 986 417,
+          E-mail: \href{mailto:rufa@camnet.com.kh}{rufa@camnet.com.kh}
+        }
+      }
+    \end{minipage}%
+  }
+}
+
+\begin{document}
+\color{RUFAInk}
+
+% watermark.
+\begin{tikzpicture}[remember picture,overlay]
+  \node[
+    opacity=0.035,
+    inner sep=0pt,
+    yshift=-1.2cm
+  ] at (current page.center) {%
+    \includegraphics[width=4.15in]{Figures/RUFA.png}
+  };
+\end{tikzpicture}
+
+% header.
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north,inner sep=0pt,yshift=-0.42cm] at (current page.north) {%
+    \begin{minipage}{0.62\paperwidth}
+      \centering
+      {\HeaderFont
+        \fontsize{12pt}{16pt}\selectfont
+        ព្រះរាជាណាចក្រកម្ពុជា
+      }\\[-0.02cm]
+      {\sffamily\bfseries\fontsize{8.5pt}{10.5pt}\selectfont
+        KINGDOM OF CAMBODIA
+      }\\[0.02cm]
+      {\HeaderFont
+        \fontsize{11pt}{15pt}\selectfont
+        ជាតិ សាសនា ព្រះមហាក្សត្រ
+      }\\[-0.02cm]
+      {\sffamily\bfseries\fontsize{7.8pt}{9.5pt}\selectfont
+        NATION\quad RELIGION\quad KING
+      }
+
+      \vspace{0.02cm}
+      \includegraphics[width=0.62in]{Figures/Tacteng.png}
+    \end{minipage}
+  };
+\end{tikzpicture}
+
+% Bilingual university identity
+\noindent
+\begin{minipage}[t]{0.37\textwidth}
+  \centering
+  \begin{tikzpicture}
+    \node[opacity=0.48,inner sep=0pt] {%
+      \includegraphics[height=2.65cm]{Figures/RUFA.png}
+    };
+  \end{tikzpicture}
+
+  \vspace{0.02cm}
+  {\HeaderFont\color{RUFASeal}
+    \fontsize{8.8pt}{11.5pt}\selectfont
+    សាកលវិទ្យាល័យភូមិន្ទវិចិត្រសិល្បៈ
+  }\\[-0.01cm]
+  {\sffamily\bfseries\color{RUFASeal}
+    \fontsize{7.6pt}{9.5pt}\selectfont
+    ROYAL UNIVERSITY OF FINE ARTS
+  }
+\end{minipage}
+
+% Heading
+\vspace{1.42cm}
+\begin{center}
+  \parbox{0.88\textwidth}{%
+    \centering
+    {\HeaderFont
+      \fontsize{11.5pt}{17.5pt}\selectfont
+      \TitleLineOne
+    }\\[0.20cm]
+    {\NormalFont
+      \fontsize{11pt}{15pt}\selectfont
+      \TitleLineTwo
+    }\\[0.18cm]
+    {\NormalFont
+      \fontsize{9.8pt}{13.5pt}\selectfont
+      \TitleLineThree
+    }
+  }
+\end{center}
+
+% Results table.
+\vspace{0.12cm}
+\noindent\makebox[\textwidth][c]{%
+  \begin{minipage}{\DocumentContentWidth}
+    {\NormalFont
+      \fontsize{8.8pt}{11.4pt}\selectfont
+      \renewcommand{\arraystretch}{1.38}
+      \setlength{\tabcolsep}{0.11cm}
+      \begin{tabularx}{\linewidth}{|
+        >{\centering\arraybackslash}p{0.75cm}|
+        >{\hsize=0.90\hsize\raggedright\arraybackslash}X|
+        >{\hsize=1.10\hsize\centering\arraybackslash}X|
+        >{\centering\arraybackslash}p{2.65cm}|
+        >{\centering\arraybackslash}p{1.30cm}|
+      }
+        \hline
+        {\HeaderFont \TableNumberHeading} &
+        {\HeaderFont \TableNameHeading} &
+        {\HeaderFont \TableProgramHeading} &
+        {\HeaderFont \TableMajorHeading} &
+        {\HeaderFont \TableResultHeading}
+        \tabularnewline\hline
+        \input{Text/RUFA_text}%
+      \end{tabularx}
+    }
+  \end{minipage}%
+}
+\vspace{0.25cm}
+\noindent\makebox[\textwidth][c]{%
+  \begin{minipage}{\DocumentContentWidth}
+    \hfill
+    \begin{minipage}{0.52\linewidth}
+      \centering
+      {\NormalFont\fontsize{9pt}{12.5pt}\selectfont
+        \DocumentDateLineOne\\
+        \DocumentDateLineTwo
+      }
+    \end{minipage}
+  \end{minipage}%
+}
+
+\vspace{0.18cm}
+\noindent\makebox[\textwidth][c]{%
+  \begin{minipage}{\DocumentContentWidth}
+    \begin{minipage}[t]{0.43\linewidth}
+      \centering
+      {\HeaderFont\fontsize{9pt}{12.5pt}\selectfont
+        \ApprovalTitleLineOne\\
+        \ApprovalTitleLineTwo
+      }
+
+      \vspace{-0.03cm}
+      \includegraphics[width=1.55in]{Figures/Stamp.png}
+
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.45\linewidth}
+      \centering
+      {\HeaderFont\fontsize{9pt}{12.5pt}\selectfont
+        \CommitteeTitle
+      }
+
+      \vspace{0.08cm}
+      \raggedright
+      {\NormalFont\fontsize{8.8pt}{12.5pt}\selectfont
+        - \CommitteeMemberOne\\
+        - \CommitteeMemberTwo\\
+        - \CommitteeMemberThree\\
+        - \CommitteeMemberFour
+      }
+    \end{minipage}
+  \end{minipage}%
+}
+
+\end{document}

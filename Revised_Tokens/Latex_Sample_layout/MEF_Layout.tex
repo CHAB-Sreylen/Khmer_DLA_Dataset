@@ -1,0 +1,197 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[
+  top=0.8cm,
+  bottom=2.15cm,
+  left=1.25cm,
+  right=1.25cm
+]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\definecolor{MEFBlue}{RGB}{38,91,139}
+\definecolor{MEFText}{RGB}{30,30,30}
+\definecolor{PlaceholderGray}{RGB}{105,105,105}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=MEFBlue,
+  linkcolor=MEFBlue
+}
+
+\newfontfamily\NormalFont[
+  Path=fonts/,
+  Extension=.ttf,
+  BoldFont=KhmerMPTC,
+  BoldFeatures={FakeBold=2}
+]{KhmerMPTC}
+
+\newfontfamily\HeaderFont[
+  Path=fonts/,
+  Extension=.ttf
+]{KhmerMPTCMoul}
+
+\DeclareTextFontCommand{\BodyHeaderBold}{\HeaderFont}
+\newcommand{\BodyNormalBold}[1]{{\NormalFont\bfseries #1}}
+
+\newlength{\DocumentContentWidth}
+\setlength{\DocumentContentWidth}{0.88\textwidth}
+
+\newcommand{\DocumentReference}{........................}
+\newcommand{\TitleLineOne}{សារលិខិតថ្វាយព្រះពរ}
+\newcommand{\TitleLineTwo}{សូមក្រាបបង្គំទូលថ្វាយ}
+\newcommand{\TitleLineThree}{សម្តេចព្រះមហាក្សត្រី នរោត្តម មុនិនាថ សីហនុ}
+\newcommand{\TitleLineFour}{ព្រះវររាជមាតាជាតិខ្មែរ ក្នុងសេរីភាព សេចក្តីថ្លៃថ្នូរ និងសុភមង្គល នៅក្នុងឱកាសព្រះរាជពិធីបុណ្យចម្រើនព្រះជន្មគម្រប់ ៩០ព្រះវស្សា យាងចូល ៩១ព្រះវស្សា នាថ្ងៃទី១៨ ខែមិថុនា ឆ្នាំ២០២៦}
+\newcommand{\DocumentDateLineOne}{ថ្ងៃ......... ខែឆ្នាំមមី អដ្ឋស័ក ព.ស.២៥៧០}
+\newcommand{\DocumentDateLineTwo}{ក្រាបបង្គំទូលថ្វាយនៅរាជធានីភ្នំពេញ ថ្ងៃទី១៦ ខែមិភាគ.ស.២០២៦}
+\newcommand{\SignatoryTitle}{ឧបនាយករដ្ឋមន្រ្តី រដ្ឋមន្ត្រីក្រសួងសេដ្ឋកិច្ចនិងហិរញ្ញវត្ថុ និងជាប្រធានឧត្តមក្រុមប្រឹក្សារសេដ្ឋកិច្ចជាតិ}
+\newcommand{\FooterAddressKhmer}{ផ្លូវលេខ ៥២ សង្កាត់វត្តភ្នំ ខណ្ឌដូនពេញ រាជធានីភ្នំពេញ កម្ពុជា}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\footskip}{1.35cm}
+
+% footer
+\fancyfoot[C]{%
+  \NormalFont\color{MEFBlue}
+  \makebox[\textwidth][c]{%
+    \begin{minipage}{0.98\textwidth}
+      {\color{MEFBlue}\hrule height 0.45pt}
+      \vspace{0.02cm}
+      \begin{minipage}[t]{0.52\linewidth}
+        \vspace{0pt}
+        \fontsize{6.8pt}{8.4pt}\selectfont
+        \FooterAddressKhmer\\
+        St.92, Sangkat Wat Phnom, Khan Daun Penh, Phnom Penh, CAMBODIA\\
+        \href{https://mef.gov.kh}{mef.gov.kh}\\
+        \href{https://t.me/mefcambodia}{t.me/mefcambodia}
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[t]{0.39\linewidth}
+        \vspace{0pt}
+        \begin{minipage}[t]{0.25\linewidth}
+          \vspace{0pt}
+          \raggedleft
+          \includegraphics[width=0.48in]{Figures/MEF_QR.png}
+        \end{minipage}%
+        \begin{minipage}[t]{0.75\linewidth}
+          \vspace{0pt}
+          \raggedleft
+          \fontsize{6.8pt}{8.4pt}\selectfont
+          ទូរស័ព្ទ៖ (+៨៥៥) ២៣ ៨៩០ ៦៦៦\\
+          Phone: (+855) 23 890 666\\
+          \href{mailto:info@mef.gov.kh}{info@mef.gov.kh}\\
+          \href{mailto:mef.cabinet@mef.gov.kh}{mef.cabinet@mef.gov.kh}
+        \end{minipage}
+      \end{minipage}
+    \end{minipage}%
+  }
+}
+
+\begin{document}
+\color{MEFText}
+
+%​header.
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north,inner sep=0pt,yshift=-0.65cm] at (current page.north) {%
+    \begin{minipage}{0.62\paperwidth}
+      \centering
+      {\HeaderFont\color{MEFBlue}
+        \fontsize{13pt}{18pt}\selectfont
+        ព្រះរាជាណាចក្រកម្ពុជា\\
+        ជាតិ សាសនា ព្រះមហាក្សត្រ
+      }
+
+      \vspace{0.03cm}
+      \includegraphics[width=0.68in]{Figures/Tacteng.png}
+    \end{minipage}
+  };
+\end{tikzpicture}
+
+% Ministry logo, ministry name, and document reference.
+\noindent
+\begin{minipage}[t]{0.34\textwidth}
+  \centering
+  \includegraphics[height=2.55cm]{Figures/MEF_logo.png}
+
+  \vspace{0.06cm}
+  {\HeaderFont\color{MEFBlue}
+    \fontsize{9.6pt}{13pt}\selectfont
+    ក្រសួងសេដ្ឋកិច្ច និង ហិរញ្ញវត្ថុ
+  }
+
+  \vspace{0.05cm}
+  {\NormalFont\color{MEFBlue}
+    \fontsize{9.3pt}{12pt}\selectfont
+    លេខ៖ \DocumentReference
+  }
+\end{minipage}
+
+% Ceremonial document title.
+\vspace{-0.05cm}
+\begin{center}
+  \parbox{0.84\textwidth}{%
+    \centering
+    {\HeaderFont
+      \fontsize{11.2pt}{16.5pt}\selectfont
+      \TitleLineOne\\
+      \TitleLineTwo\\
+      \TitleLineThree\\
+      \TitleLineFour
+    }
+  }
+\end{center}
+
+% Body
+\vspace{0.03cm}
+\noindent\makebox[\textwidth][c]{%
+  \begin{minipage}{\DocumentContentWidth}
+    {\NormalFont
+      \fontsize{9.7pt}{13.6pt}\selectfont
+      \justifying
+      \sloppy
+      \setlength{\emergencystretch}{3em}
+      \setlength{\parindent}{1cm}
+      \setlength{\parskip}{0pt}
+      \let\textbf\BodyHeaderBold
+      \input{Text/MEF_text}
+      \par
+    }
+  \end{minipage}%
+}
+
+% Date, signature title, stamp, and signatory name.
+\vspace{0.18cm}
+\noindent\makebox[\textwidth][c]{%
+  \begin{minipage}{\DocumentContentWidth}
+    \hfill
+    \begin{minipage}{0.56\linewidth}
+      \centering
+      {\NormalFont\fontsize{9pt}{12.5pt}\selectfont
+        \DocumentDateLineOne\\
+        \DocumentDateLineTwo
+      }
+
+      \vspace{0.03cm}
+      {\HeaderFont\fontsize{9.4pt}{13pt}\selectfont
+        \SignatoryTitle
+      }
+
+      \vspace{-0.08cm}
+      \includegraphics[width=1.55in]{Figures/Stamp.png}
+    \end{minipage}
+  \end{minipage}%
+}
+
+\end{document}

@@ -1,0 +1,208 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[
+  top=2cm,
+  bottom=1.95cm,
+  left=1.25cm,
+  right=1.25cm
+]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\definecolor{MoHBlue}{RGB}{39,91,119}
+\definecolor{MoHText}{RGB}{35,35,35}
+\definecolor{PlaceholderGray}{RGB}{105,105,105}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=MoHBlue,
+  linkcolor=MoHBlue
+}
+
+\newfontfamily\NormalFont[
+  Path=fonts/,
+  Extension=.ttf,
+  BoldFont=KhmerMPTC,
+  BoldFeatures={FakeBold=2}
+]{KhmerMPTC}
+
+\newfontfamily\HeaderFont[
+  Path=fonts/,
+  Extension=.ttf
+]{KhmerMPTCMoul}
+
+\DeclareTextFontCommand{\BodyBold}{\HeaderFont}
+
+\newlength{\DocumentContentWidth}
+\setlength{\DocumentContentWidth}{0.88\textwidth}
+\newlength{\DocumentSideInset}
+\setlength{\DocumentSideInset}{0.06\textwidth}
+
+\newcommand{\TitleSubject}{ស្ថានភាពជំងឺគ្រុនចាញ់រយៈពេល៦ខែ ឆ្នាំ២០២៦}
+\newcommand{\DocumentDateLineOne}{ថ្ងៃព្រហស្បតិ៍ ២កើត ខែទុតិយាសាឍ ឆ្នាំមមី អដ្ឋស័ក ព.ស.២៥៧០}
+\newcommand{\DocumentDateLineTwo}{រាជធានីភ្នំពេញ ថ្ងៃទី១៦ ខែកក្កដា ឆ្នាំ២០២៦}
+\newcommand{\FooterAddressLineOne}{អាសយដ្ឋាន៖ ដីឡូតិ៍លេខ៨០ វិថីសម្តេច ប៉ែន នុត (២៨៩)}
+\newcommand{\FooterAddressLineTwo}{សង្កាត់បឹងកក់ទី២ ខណ្ឌទួលគោក រាជធានីភ្នំពេញ}
+\newcommand{\FooterPhone}{(+៨៥៥) ២៣ ៨៨៥ ៩៧០}
+
+% Footer
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\footskip}{1.25cm}
+
+\fancyfoot[C]{%
+  \NormalFont
+  \makebox[\textwidth][c]{%
+    \begin{minipage}{0.98\textwidth}
+      \centering
+      {\color{MoHText}\fontsize{8pt}{9pt}\selectfont
+        \thepage/\pageref{MoHLastPage}
+      }
+
+      \vspace{0.05cm}
+      {\color{MoHBlue}\rule{\linewidth}{0.45pt}}
+
+      \vspace{0.04cm}
+      \begin{minipage}[t]{0.43\linewidth}
+        \color{MoHBlue}
+        \fontsize{7.2pt}{9pt}\selectfont
+        \FooterAddressLineOne\\
+        \FooterAddressLineTwo
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[t]{0.25\linewidth}
+        \color{MoHBlue}
+        \fontsize{7.2pt}{9pt}\selectfont
+        ទូរស័ព្ទ៖ \FooterPhone\\
+        អ៊ីម៉ែល៖ info@moh.gov.kh
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[t]{0.27\linewidth}
+        \raggedleft
+        \color{MoHBlue}
+        \fontsize{7.2pt}{9pt}\selectfont
+        គេហទំព័រ៖ www.moh.gov.kh\\
+        តេឡេក្រាម៖ t.me/MOHCambodia
+      \end{minipage}
+    \end{minipage}%
+  }
+}
+
+\begin{document}
+\color{MoHText}
+\vspace*{-0.55cm}
+
+% Header
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north,inner sep=0pt,yshift=-0.85cm] at (current page.north) {%
+    \begin{minipage}{0.62\paperwidth}
+      \centering
+      {\HeaderFont\color{MoHBlue}
+        \fontsize{13pt}{18.5pt}\selectfont
+        ព្រះរាជាណាចក្រកម្ពុជា\\
+        ជាតិ សាសនា ព្រះមហាក្សត្រ
+      }
+
+      \vspace{0.05cm}
+      \includegraphics[width=0.62in]{Figures/Tacteng.png}
+    \end{minipage}
+  };
+\end{tikzpicture}
+
+% Ministry identity
+\noindent
+\begin{minipage}[t]{0.29\textwidth}
+  \centering
+  \includegraphics[height=2.45cm]{Figures/MoH_logo.png}
+
+  \vspace{0.08cm}
+  {\HeaderFont\color{MoHBlue}
+    \fontsize{10.5pt}{14pt}\selectfont
+    ក្រសួងសុខាភិបាល
+  }
+\end{minipage}
+
+% Document title
+\vspace{0.2cm}
+\begin{center}
+  {\HeaderFont\color{MoHBlue}
+    \fontsize{13pt}{18pt}\selectfont
+    សេចក្ដីជូនដំណឹង\\
+    ស្ដីពី
+  }
+
+  \vspace{0.08cm}
+  \parbox{0.82\textwidth}{%
+    \centering
+    {\HeaderFont\color{MoHBlue}
+      \fontsize{11.5pt}{17pt}\selectfont
+      \TitleSubject
+    }
+  }
+\end{center}
+
+% Body
+\vspace{0.1cm}
+{\NormalFont
+  \fontsize{11.75pt}{14.5pt}\selectfont
+  \justifying
+  \sloppy
+  \setlength{\emergencystretch}{3em}
+  \setlength{\leftskip}{\DocumentSideInset}
+  \setlength{\rightskip}{\DocumentSideInset}
+  \setlength{\parindent}{1cm}
+  \setlength{\parskip}{0pt}
+  \let\textbf\BodyBold
+  \input{Text/MoH_text}
+  \par
+}
+
+% Date, signature and stamp
+\vspace{0.35cm}
+\noindent\makebox[\textwidth][c]{%
+  \begin{minipage}{\DocumentContentWidth}
+    \hfill
+    \begin{minipage}{0.57\linewidth}
+      \centering
+      {\NormalFont\fontsize{10pt}{13.5pt}\selectfont
+        \DocumentDateLineOne\\
+        \DocumentDateLineTwo
+      }
+
+      \vspace{0.08cm}
+      \includegraphics[width=1.6in]{Figures/Stamp.png}
+    \end{minipage}
+  \end{minipage}%
+}
+
+% Social-media QR callout
+\vspace{0.2cm}
+\noindent\makebox[\textwidth][c]{%
+  \begin{minipage}{\DocumentContentWidth}
+    \begin{minipage}{0.42\linewidth}
+      \centering
+      {\NormalFont\fontsize{9.5pt}{13pt}\selectfont
+        \textbf{☞ស្កែនដើម្បីទទួលព័ត៌មានពី}\\
+        \textbf{បណ្តាញសង្គមផ្លូវការរបស់}\\
+        \textbf{ក្រសួងសុខាភិបាល}
+      }
+
+      \vspace{0.12cm}
+      \includegraphics[width=0.9in]{Figures/MoH_QR.png}
+    \end{minipage}
+  \end{minipage}%
+}
+
+\label{MoHLastPage}
+\end{document}
