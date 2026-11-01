@@ -1,0 +1,236 @@
+\documentclass[a4paper,12pt]{article}
+\providecommand{\ClosingName}{}
+
+\usepackage[
+  top=0.70cm,
+  bottom=1.55cm,
+  left=1.30cm,
+  right=1.30cm
+]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\definecolor{MPWTText}{RGB}{38,38,38}
+\definecolor{MPWTBlue}{RGB}{37,56,123}
+\definecolor{PlaceholderGray}{RGB}{105,105,105}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=MPWTBlue,
+  linkcolor=MPWTBlue
+}
+
+\newfontfamily\NormalFont[
+  Path=fonts/,
+  Extension=.ttf,
+  BoldFont=KhmerMPTC,
+  BoldFeatures={FakeBold=2}
+]{KhmerMPTC}
+
+\newfontfamily\HeaderFont[
+  Path=fonts/,
+  Extension=.ttf
+]{KhmerMPTCMoul}
+
+\DeclareTextFontCommand{\BodyHeaderBold}{\HeaderFont}
+
+\newlength{\DocumentContentWidth}
+\setlength{\DocumentContentWidth}{0.90\textwidth}
+\newcommand{\DocumentReference}{........................}
+\newcommand{\HeaderDateLineOne}{ថ្ងៃ .......ខែ........ ឆ្នាំមមី អដ្ឋស័ក ព.ស.២៥៧០}
+\newcommand{\HeaderDateLineTwo}{រាជធានីភ្នំពេញ ថ្ងៃទី........ ខែ........ ឆ្នាំ២០២៦}
+\newcommand{\TitleLineOne}{សារលិខិតចូលរួមរំលែកទុក្ខ}
+\newcommand{\TitleLineTwo}{ជូនចំពោះ}
+\newcommand{\TitleLineThree}{លោកស្រី គឿន ប៉ុស្តិ៍ និងក្រុមគ្រួសារ}
+\newcommand{\ClosingTitle}{រដ្ឋមន្រ្តី}
+\newcommand{\FooterAddress}{[បញ្ចូលអាសយដ្ឋានក្រសួងសាធារណការ និងដឹកជញ្ជូន]}
+\newcommand{\FooterPhoneOne}{(+៨៥៥) ២៣​៤២៦​៦៤០}
+\newcommand{\FooterPhoneTwo}{(+៨៥៥) ២៣ ៤២៧​៨៦២}
+
+% helpers.
+\newcommand{\MPWTBodyParagraph}[1]{%
+  \par\noindent\hspace*{\parindent}#1\par
+}
+
+\newcommand{\MPWTSalutation}[1]{%
+  \par\noindent
+  {\HeaderFont\fontsize{9.8pt}{13.5pt}\selectfont #1}\par
+}
+
+\newcommand{\MPWTSection}[1]{%
+  \par\noindent
+  {\HeaderFont\fontsize{10pt}{13.5pt}\selectfont #1}\par
+}
+
+\newenvironment{MPWTItemize}{%
+  \begin{itemize}[
+    leftmargin=1.15cm,
+    label={-},
+    labelsep=0.18cm,
+    itemsep=0pt,
+    topsep=0pt,
+    parsep=0pt,
+    partopsep=0pt
+  ]
+}{%
+  \end{itemize}
+}
+
+% footer.
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\footskip}{0.95cm}
+
+\fancyfoot[C]{%
+  \NormalFont\color{MPWTText}
+  \makebox[\textwidth][c]{%
+    \begin{minipage}{0.94\textwidth}
+      {\color{MPWTText}\hrule height 0.38pt}
+      \vspace{0.05cm}
+      \begin{minipage}[t]{0.57\linewidth}
+        \vspace{0pt}
+        \raggedright
+        {\fontsize{6.5pt}{8pt}\selectfont
+          \FooterAddress
+        }
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[t]{0.39\linewidth}
+        \vspace{0pt}
+        \raggedleft
+        {\fontsize{6.5pt}{8pt}\selectfont
+          ទូរស័ព្ទ៖ \FooterPhoneOne, \FooterPhoneTwo
+        }
+      \end{minipage}
+    \end{minipage}%
+  }
+}
+
+\begin{document}
+\color{MPWTText}
+
+% national header.
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north,inner sep=0pt,yshift=-0.52cm] at (current page.north) {%
+    \begin{minipage}{0.61\paperwidth}
+      \centering
+      {\HeaderFont
+        \fontsize{12.5pt}{17.5pt}\selectfont
+        ព្រះរាជាណាចក្រកម្ពុជា\\
+        ជាតិ សាសនា ព្រះមហាក្សត្រ
+      }
+
+      \vspace{0.02cm}
+      \includegraphics[width=0.66in]{Figures/Tacteng.png}
+    \end{minipage}
+  };
+\end{tikzpicture}
+
+\vspace*{0.36cm}
+\noindent
+\begin{minipage}[t]{0.35\textwidth}
+  \centering
+  \includegraphics[height=2.35cm]{Figures/MPWT_logo.png}
+\end{minipage}
+
+\vspace{0.28cm}
+\noindent\makebox[\textwidth][c]{%
+  \begin{minipage}{0.93\textwidth}
+    \begin{minipage}[b]{0.47\linewidth}
+      \raggedright
+      {\HeaderFont
+        \fontsize{9.6pt}{13pt}\selectfont
+        ក្រសួងសាធារណការ និងដឹកជញ្ជូន
+      }
+
+      \vspace{0.12cm}
+      {\NormalFont
+        \fontsize{9pt}{11.8pt}\selectfont
+        លេខ៖ \DocumentReference
+      }
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[b]{0.48\linewidth}
+      \centering
+      {\NormalFont\fontsize{9pt}{12.3pt}\selectfont
+        \HeaderDateLineOne\\
+        \HeaderDateLineTwo
+      }
+    \end{minipage}
+  \end{minipage}%
+}
+
+%​title.
+\vspace{0.65cm}
+\begin{center}
+  \parbox{0.84\textwidth}{%
+    \centering
+    {\HeaderFont
+      \fontsize{11pt}{16pt}\selectfont
+      \TitleLineOne\\
+      \TitleLineTwo\\
+      \TitleLineThree
+    }
+  }
+\end{center}
+
+% body.
+\vspace{0.12cm}
+\begin{list}{}{%
+  \setlength{\leftmargin}{0.05\textwidth}%
+  \setlength{\rightmargin}{0.05\textwidth}%
+  \setlength{\topsep}{0pt}%
+  \setlength{\partopsep}{0pt}%
+  \setlength{\parsep}{0pt}%
+  \setlength{\itemsep}{0pt}%
+}
+  \item[]
+  {\NormalFont
+    \fontsize{10.1pt}{15.2pt}\selectfont
+    \justifying
+    \sloppy
+    \setlength{\emergencystretch}{3em}
+    \setlength{\parindent}{0.95cm}
+    \setlength{\parskip}{0pt}
+    \let\textbf\BodyHeaderBold
+    \input{Text/MPWT_text}
+    \par
+  }
+\end{list}
+
+% signatory and stamp.
+\vspace{0.18cm}
+\noindent\makebox[\textwidth][c]{%
+  \begin{minipage}{\DocumentContentWidth}
+    \hfill
+    \begin{minipage}{0.53\linewidth}
+      \centering
+      {\HeaderFont\fontsize{9.2pt}{12.7pt}\selectfont
+        \ClosingTitle
+      }
+
+      \vspace{-0.05cm}
+      \includegraphics[width=1.60in]{Figures/Stamp.png}
+
+      \vspace{-0.09cm}
+      {\HeaderFont
+        \fontsize{9.7pt}{13pt}\selectfont
+        \ClosingName
+      }
+    \end{minipage}
+  \end{minipage}%
+}
+
+\end{document}

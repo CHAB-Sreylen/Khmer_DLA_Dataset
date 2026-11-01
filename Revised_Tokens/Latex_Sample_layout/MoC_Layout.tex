@@ -1,0 +1,252 @@
+\documentclass[a4paper,12pt]{article}
+\providecommand{\ClosingName}{}
+
+\usepackage[
+  top=0.65cm,
+  bottom=1.55cm,
+  left=1.20cm,
+  right=1.20cm
+]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\definecolor{MoCBlue}{RGB}{42,70,119}
+\definecolor{MoCText}{RGB}{38,38,38}
+\definecolor{PlaceholderGray}{RGB}{105,105,105}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=MoCBlue,
+  linkcolor=MoCBlue
+}
+
+\newfontfamily\NormalFont[
+  Path=fonts/,
+  Extension=.ttf,
+  BoldFont=KhmerMPTC,
+  BoldFeatures={FakeBold=2}
+]{KhmerMPTC}
+
+\newfontfamily\HeaderFont[
+  Path=fonts/,
+  Extension=.ttf
+]{KhmerMPTCMoul}
+
+\DeclareTextFontCommand{\BodyHeaderBold}{\HeaderFont}
+
+\newlength{\DocumentContentWidth}
+\setlength{\DocumentContentWidth}{0.88\textwidth}
+\newcommand{\DocumentReference}{........................}
+\newcommand{\HeaderDateLineOne}{{ថ្ងៃ .......ខែ........ ឆ្នាំមមី អដ្ឋស័ក ព.ស.២៥៧០}}
+\newcommand{\HeaderDateLineTwo}{រាជធានីភ្នំពេញ ថ្ងៃទី........ ខែ........ ឆ្នាំ២០២៦}
+\newcommand{\DocumentTitle}{សេចក្តីជូនដំណឹង}
+\newcommand{\QRCaption}{សម្រាប់ការចុះឈ្មោះ៖}
+\newcommand{\ClosingTitle}{សូមអរគុណ}
+\newcommand{\FooterAddressKhmer}{%
+  ផ្ទះលេខ១៩-៦១ មហាវិថីសហព័ន្ធរុស្ស៊ី ភូមិទឹកថ្លា សង្កាត់ទឹកថ្លា ខណ្ឌសែនសុខ រាជធានីភ្នំពេញ
+}
+\newcommand{\FooterPhone}{(៨៥៥)-២៣ ៨៦៦ ៤៦៩}
+\newcommand{\FooterAddressEnglish}{%
+  Lot 19-61, Russian Federation Blvd, Phum Tuek Thla, Sangkat Tuek Thla,
+  Khan Sen Sok, Phnom Penh, Kingdom of CAMBODIA
+}
+\newcommand{\FooterPhoneEnglish}{(855)-23 866 469}
+
+% body helpers.
+\newcommand{\MoCBodyParagraph}[1]{%
+  \par\noindent\hspace*{\parindent}#1\par
+}
+
+\newcommand{\MoCSection}[1]{%
+  \par\noindent
+  {\HeaderFont\fontsize{10pt}{13.5pt}\selectfont #1}\par
+}
+
+\newenvironment{MoCItemize}{%
+  \begin{itemize}[
+    leftmargin=1.15cm,
+    label={-},
+    labelsep=0.18cm,
+    itemsep=0pt,
+    topsep=0pt,
+    parsep=0pt,
+    partopsep=0pt
+  ]
+}{%
+  \end{itemize}
+}
+
+%footer.
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\footskip}{1.02cm}
+
+\fancyfoot[C]{%
+  \NormalFont\color{MoCText}
+  \makebox[\textwidth][c]{%
+    \begin{minipage}{0.96\textwidth}
+      {\color{MoCText}\hrule height 0.42pt}
+      \vspace{0.04cm}
+      \begin{minipage}[t]{0.72\linewidth}
+        \vspace{0pt}
+        \raggedright
+        {\fontsize{6.2pt}{7.6pt}\selectfont
+          \FooterAddressKhmer\\[-0.02cm]
+          {\sffamily\fontsize{5.9pt}{7.2pt}\selectfont
+            \FooterAddressEnglish
+          }
+        }
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[t]{0.25\linewidth}
+        \vspace{0pt}
+        \raggedleft
+        {\fontsize{6.2pt}{7.6pt}\selectfont
+          ទូរស័ព្ទ / ទូរសារ៖ \FooterPhone\\[-0.02cm]
+          {\sffamily\fontsize{5.9pt}{7.2pt}\selectfont
+            Phone/Facsimile: \FooterPhoneEnglish
+          }
+        }
+      \end{minipage}
+    \end{minipage}%
+  }
+}
+
+\begin{document}
+\color{MoCText}
+
+% national header.
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north,inner sep=0pt,yshift=-0.52cm] at (current page.north) {%
+    \begin{minipage}{0.61\paperwidth}
+      \centering
+      {\HeaderFont\color{MoCBlue}
+        \fontsize{13pt}{18pt}\selectfont
+        ព្រះរាជាណាចក្រកម្ពុជា\\
+        ជាតិ សាសនា ព្រះមហាក្សត្រ
+      }
+
+      \vspace{0.02cm}
+      \includegraphics[width=0.68in]{Figures/Tacteng.png}
+    \end{minipage}
+  };
+\end{tikzpicture}
+
+%logo and identity.
+\vspace*{0.38cm}
+\noindent
+\begin{minipage}[t]{0.35\textwidth}
+  \centering
+  \includegraphics[height=2.72cm]{Figures/MoC_logo.png}
+
+  \vspace{0.05cm}
+  {\HeaderFont\color{MoCBlue}
+    \fontsize{9.6pt}{13pt}\selectfont
+    ក្រសួងពាណិជ្ជកម្ម
+  }
+\end{minipage}
+
+% Reference .
+\vspace{0.05cm}
+\noindent\makebox[\textwidth][c]{%
+  \begin{minipage}{0.94\textwidth}
+    \begin{minipage}[t]{0.43\linewidth}
+      \raggedright
+      {\NormalFont\fontsize{9pt}{11.8pt}\selectfont
+        លេខ៖ \DocumentReference
+      }
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.52\linewidth}
+      \centering
+      {\NormalFont\fontsize{9pt}{12.3pt}\selectfont
+        \HeaderDateLineOne\\
+        \HeaderDateLineTwo
+      }
+    \end{minipage}
+  \end{minipage}%
+}
+
+% title.
+\vspace{0.42cm}
+\begin{center}
+  {\HeaderFont
+    \fontsize{11.2pt}{15pt}\selectfont
+    \DocumentTitle
+  }
+
+  \vspace{0.05cm}
+  \includegraphics[width=0.55in]{Figures/Tacteng.png}
+\end{center}
+
+% body.
+\vspace{0.10cm}
+\begin{list}{}{%
+  \setlength{\leftmargin}{0.06\textwidth}%
+  \setlength{\rightmargin}{0.06\textwidth}%
+  \setlength{\topsep}{0pt}%
+  \setlength{\partopsep}{0pt}%
+  \setlength{\parsep}{0pt}%
+  \setlength{\itemsep}{0pt}%
+}
+  \item[]
+  {\NormalFont
+    \fontsize{9.7pt}{14.8pt}\selectfont
+    \justifying
+    \sloppy
+    \setlength{\emergencystretch}{3em}
+    \setlength{\parindent}{0.95cm}
+    \setlength{\parskip}{0pt}
+    \let\textbf\BodyHeaderBold
+    \input{Text/MoC_text}
+    \par
+  }
+\end{list}
+
+% QR codes, stamp.
+\vspace{0.18cm}
+\noindent\makebox[\textwidth][c]{%
+  \begin{minipage}{\DocumentContentWidth}
+    \begin{minipage}[t]{0.48\linewidth}
+      \vspace{0pt}
+      \raggedright
+      {\NormalFont\fontsize{8.8pt}{11.5pt}\selectfont
+        \QRCaption
+      }
+
+      \vspace{0.06cm}
+      \includegraphics[width=2.35in]{Figures/MoC_QR.png}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.43\linewidth}
+      \vspace{0pt}
+      \centering
+      {\HeaderFont\fontsize{9pt}{12.5pt}\selectfont
+        \ClosingTitle
+      }
+
+      \vspace{-0.05cm}
+      \includegraphics[width=1.58in]{Figures/Stamp.png}
+
+      \vspace{-0.09cm}
+      {\HeaderFont\color{MoCBlue}
+        \fontsize{9.5pt}{13pt}\selectfont
+        \ClosingName
+      }
+    \end{minipage}
+  \end{minipage}%
+}
+
+\end{document}

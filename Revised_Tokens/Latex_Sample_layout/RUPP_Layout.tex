@@ -1,0 +1,266 @@
+\documentclass[a4paper,12pt]{article}
+\providecommand{\SignatoryName}{}
+
+\usepackage[
+  top=0.7cm,
+  bottom=1.55cm,
+  left=1.25cm,
+  right=1.25cm
+]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{enumitem}
+
+\XeTeXlinebreaklocale "km"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\definecolor{RUPPInk}{RGB}{28,34,36}
+\definecolor{RUPPGold}{RGB}{171,121,16}
+\definecolor{PlaceholderGray}{RGB}{105,105,105}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=RUPPInk,
+  linkcolor=RUPPInk
+}
+
+\newfontfamily\NormalFont[
+  Path=fonts/,
+  Extension=.ttf,
+  BoldFont=KhmerMPTC,
+  BoldFeatures={FakeBold=2}
+]{KhmerMPTC}
+
+\newfontfamily\HeaderFont[
+  Path=fonts/,
+  Extension=.ttf
+]{KhmerMPTCMoul}
+
+\DeclareTextFontCommand{\BodyHeaderBold}{\HeaderFont}
+
+\newlength{\DocumentContentWidth}
+\setlength{\DocumentContentWidth}{0.90\textwidth}
+\newlength{\RUPPLabelWidth}
+\setlength{\RUPPLabelWidth}{3.05cm}
+\newlength{\RUPPContentIndent}
+\setlength{\RUPPContentIndent}{3.55cm}
+
+\newcommand{\DocumentReference}{........................}
+\newcommand{\TitleLineOne}{សេចក្តីជូនដំណឹង}
+\newcommand{\TitleLineTwo}{ស្តីពី}
+\newcommand{\TitleLineThree}{ការប្រឡងជ្រើសរើសនិស្សិតចូលរៀនថ្នាក់បរិញ្ញាបត្រជាន់ខ្ពស់ ផ្នែកគ្រប់គ្រងអាជីវកម្មលក្ខណៈគ្រួសារជំនាន់ទី៣ នៅសាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ សម្រាប់ឆ្នាំសិក្សា២០២៦-២០២៧}
+\newcommand{\DocumentDateLineOne}{ថ្ងៃ.......... ខែ...... ឆ្នាំមមី អដ្ឋស័ក ព.ស ២៥៦៩}
+\newcommand{\DocumentDateLineTwo}{រាជធានីភ្នំពេញ ថ្ងៃទី........ ខែ........ ឆ្នាំ២០២៦}
+\newcommand{\SignatoryTitle}{ជ សាកលវិទ្យាធិការ\\
+សាកលវិទ្យាធិការរង}
+\newcommand{\FooterAddress}{%
+  មហាវិថីសហព័ន្ធរុស្ស៊ី សង្កាត់ទឹកល្អក់១ ខណ្ឌទួលគោក រាជធានីភ្នំពេញ
+}
+\newcommand{\FooterEmail}{secretary@rupp.edu.kh}
+
+\newcommand{\RUPPBodyParagraph}[1]{%
+  \par\indent #1\par
+}
+
+\newcommand{\RUPPSection}[1]{%
+  \par
+  \begin{center}
+    {\HeaderFont\fontsize{9.5pt}{12.5pt}\selectfont #1}
+  \end{center}
+  \vspace{-0.12cm}
+}
+
+\newcommand{\RUPPLabelRow}[2]{%
+  \par\noindent
+  \begin{tabularx}{\linewidth}{@{}>{\HeaderFont\raggedright\arraybackslash}p{\RUPPLabelWidth}@{\hspace{0.12cm}:\hspace{0.18cm}}>{\raggedright\arraybackslash}X@{}}
+    #1 & #2
+  \end{tabularx}\par
+}
+
+\newcommand{\RUPPValueRow}[3]{%
+  \par\noindent
+  \begin{tabularx}{\linewidth}{@{}>{\HeaderFont\raggedright\arraybackslash}p{\RUPPLabelWidth}@{\hspace{0.12cm}:\hspace{0.18cm}}>{\raggedright\arraybackslash}X >{\raggedleft\arraybackslash}p{2.1cm}@{}}
+    #1 & #2 & #3
+  \end{tabularx}\par
+}
+
+\newcommand{\RUPPBullet}[1]{%
+  \par
+  \begin{list}{}{%
+    \setlength{\leftmargin}{\RUPPContentIndent}%
+    \setlength{\rightmargin}{0pt}%
+    \setlength{\topsep}{0pt}%
+    \setlength{\partopsep}{0pt}%
+    \setlength{\parsep}{0pt}%
+    \setlength{\itemsep}{0pt}%
+  }%
+    \item[] -\,#1%
+  \end{list}%
+}
+
+\newcommand{\RUPPBulletValue}[2]{%
+  \par
+  \begin{list}{}{%
+    \setlength{\leftmargin}{\RUPPContentIndent}%
+    \setlength{\rightmargin}{0pt}%
+    \setlength{\topsep}{0pt}%
+    \setlength{\partopsep}{0pt}%
+    \setlength{\parsep}{0pt}%
+    \setlength{\itemsep}{0pt}%
+  }%
+    \item[]
+    \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X >{\raggedleft\arraybackslash}p{2.1cm}@{}}
+      -\,#1 & #2
+    \end{tabularx}%
+  \end{list}%
+}
+
+% Footer
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\footskip}{1cm}
+
+\fancyfoot[C]{%
+  \NormalFont\color{RUPPInk}
+  \makebox[\textwidth][c]{%
+    \begin{minipage}{0.96\textwidth}
+      {\color{RUPPInk}\hrule height 0.45pt}
+      \vspace{0.05cm}
+      \centering
+      {\fontsize{6.8pt}{8.3pt}\selectfont
+        \FooterAddress\\
+        អ៊ីមែល៖ \href{mailto:\FooterEmail}{\FooterEmail}
+        \quad
+        គេហទំព័រ៖ \href{https://www.rupp.edu.kh}{www.rupp.edu.kh}
+      }
+    \end{minipage}%
+  }
+}
+
+\begin{document}
+\color{RUPPInk}
+
+% Water mark
+\begin{tikzpicture}[remember picture,overlay]
+  \node[
+    opacity=0.035,
+    inner sep=0pt,
+    yshift=-1.1cm
+  ] at (current page.center) {%
+    \includegraphics[width=3.25in]{Figures/RUPP.png}
+  };
+\end{tikzpicture}
+
+% Centered national header.
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north,inner sep=0pt,yshift=-0.35cm] at (current page.north) {%
+    \begin{minipage}{0.60\paperwidth}
+      \centering
+      {\HeaderFont
+        \fontsize{12.5pt}{17.5pt}\selectfont
+        ព្រះរាជាណាចក្រកម្ពុជា\\
+        ជាតិ សាសនា ព្រះមហាក្សត្រ
+      }
+
+      \vspace{0.02cm}
+      \includegraphics[width=0.62in]{Figures/Tacteng.png}
+    \end{minipage}
+  };
+\end{tikzpicture}
+
+% University identity and reference.
+\noindent
+\begin{minipage}[t]{0.34\textwidth}
+  \centering
+  \includegraphics[height=2.15cm]{Figures/RUPP.png}
+
+  \vspace{0.05cm}
+  {\HeaderFont
+    \fontsize{8.8pt}{12pt}\selectfont
+    សាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ
+  }
+
+  \vspace{0.03cm}
+  {\NormalFont
+    \fontsize{8.8pt}{11.5pt}\selectfont
+    លេខ៖ \DocumentReference
+  }
+\end{minipage}
+
+% Document title.
+\vspace{0.10cm}
+\begin{center}
+  \parbox{0.86\textwidth}{%
+    \centering
+    {\HeaderFont
+      \fontsize{10.2pt}{14.5pt}\selectfont
+      \TitleLineOne\\
+      \TitleLineTwo\\
+      \TitleLineThree
+    }
+  }
+\end{center}
+
+\vspace{0.03cm}
+\begin{list}{}{%
+  \setlength{\leftmargin}{0.05\textwidth}%
+  \setlength{\rightmargin}{0.05\textwidth}%
+  \setlength{\topsep}{0pt}%
+  \setlength{\partopsep}{0pt}%
+  \setlength{\parsep}{0pt}%
+  \setlength{\itemsep}{0pt}%
+}
+  \item[]
+  {\NormalFont
+    \fontsize{9.1pt}{12.2pt}\selectfont
+    \justifying
+    \sloppy
+    \setlength{\emergencystretch}{3em}
+    \setlength{\parindent}{0.85cm}
+    \setlength{\parskip}{0pt}
+    \let\textbf\BodyHeaderBold
+    \hspace*{\parindent}%
+    \input{Text/RUPP_text}
+    \par
+  }
+\end{list}
+
+% Date, signature, and stamp.
+\vspace{0.12cm}
+\noindent\makebox[\textwidth][c]{%
+  \begin{minipage}{\DocumentContentWidth}
+    \hfill
+    \begin{minipage}{0.53\linewidth}
+      \centering
+      {\NormalFont\fontsize{8.8pt}{12pt}\selectfont
+        \DocumentDateLineOne\\
+        \DocumentDateLineTwo
+      }
+
+      \vspace{0.02cm}
+      {\HeaderFont\fontsize{8.9pt}{12.4pt}\selectfont
+        \SignatoryTitle
+      }
+
+      \vspace{-0.09cm}
+      \includegraphics[width=1.48in]{Figures/Stamp.png}
+
+      \vspace{-0.08cm}
+      {\HeaderFont\color{RUPPGold}
+        \fontsize{9.2pt}{12.5pt}\selectfont
+        \SignatoryName
+      }
+    \end{minipage}
+  \end{minipage}%
+}
+
+\end{document}
