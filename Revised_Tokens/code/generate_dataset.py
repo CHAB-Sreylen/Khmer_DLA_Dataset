@@ -4,8 +4,15 @@ import shutil
 import random 
 import re
 import subprocess
+import argparse
+import sys
 from pathlib import Path
 from concurrent.futures import ProcessPoolExecutor, as_completed
+from layout_sample.imported_layouts import LAYOUTS, generate_imported_doc
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 
 # 0. Download MikTeX into your machine , and add the path of its to make xelatex and pdftocairo can accessible 
@@ -50,7 +57,8 @@ mptc_doc = 5
 num_doc = 5
 table_doc = 5
 combined_doc = 5
-total_doc = itc_doc + mptc_doc + num_doc + table_doc + combined_doc
+imported_doc = 5  # samples per additional institutional template
+total_doc = itc_doc + mptc_doc + num_doc + table_doc + combined_doc + len(LAYOUTS) * imported_doc
 DPI = 150 # resolution for pdftocario output 
 
 
@@ -109,7 +117,7 @@ def compile_latex_job(stem,tex_content,paragraph_text,dest_dir):
     try:
         # 1. Compile to PDF with XeLaTex(for whatever that compile with khmer font)
         result1 = subprocess.run(
-            ["xelatex","-interaction=nonstopmode","-halt-on-error",tex_path.name],   
+            ["xelatex","--disable-installer","-interaction=nonstopmode","-halt-on-error",tex_path.name],
             cwd = str(temp_compile_dir),  
             capture_output = True,
             text = True,
@@ -118,6 +126,17 @@ def compile_latex_job(stem,tex_content,paragraph_text,dest_dir):
             timeout = 30    
         )
         if result1.returncode !=0:
+            print(f"{stem}: XeLaTeX failed: {result1.stdout[-2000:]} {result1.stderr[-1000:]}", flush=True)
+            return False
+
+        # Resolve total-page references and remembered TikZ positions.
+        result1 = subprocess.run(
+            ["xelatex", "--disable-installer", "-interaction=nonstopmode", "-halt-on-error", tex_path.name],
+            cwd=str(temp_compile_dir), capture_output=True, text=True,
+            encoding="utf-8", errors="ignore", timeout=30
+        )
+        if result1.returncode != 0:
+            print(f"{stem}: second XeLaTeX pass failed: {result1.stdout[-2000:]}", flush=True)
             return False
 
         # 2. Render PNG with pdftocairo
@@ -131,19 +150,24 @@ def compile_latex_job(stem,tex_content,paragraph_text,dest_dir):
             timeout=20
         )
         if result2.returncode != 0:
+            print(f"{stem}: PDF rendering failed: {result2.stderr[-2000:]}", flush=True)
             return False
 
         # 3. Copy result image to destination directory
         if png_pattern.exists():
-            shutil.copy(png_pattern,dest_png_path)
-            return True 
+            pages = sorted(temp_compile_dir.glob(f"{stem}-[0-9]*.png"),
+                           key=lambda path: int(path.stem.rsplit("-", 1)[1]))
+            for page in pages:
+                shutil.copy(page, dest_dir / page.name)
+            return [page.name for page in pages]
         else: 
             fallback = temp_compile_dir/f"{stem}-page1.png"
             if fallback.exists():
                 shutil.copy(fallback,dest_png_path)
                 return True
             return False 
-    except Exception:
+    except Exception as exc:
+        print(f"{stem}: {type(exc).__name__}: {exc}", flush=True)
         return False
     finally:
         # Clean 
@@ -154,6 +178,8 @@ def compile_latex_job(stem,tex_content,paragraph_text,dest_dir):
                     f.unlink()
                 except Exception:
                     pass 
+        for page in temp_compile_dir.glob(f"{stem}-[0-9]*.png"):
+            page.unlink(missing_ok=True)
 
 # 5. Layout sample 
 # 5.1. Every document layout samples can reuse this below function 
@@ -218,12 +244,18 @@ from layout_sample import (
 # 6. Dataset generation
 
 def generate_dataset():
+    missing = [name for name in ("xelatex", "pdftocairo") if shutil.which(name) is None]
+    if missing:
+        raise RuntimeError("Missing rendering tools: " + ", ".join(missing))
     print("Initializing dataset directories...", flush=True)
     dataset_dir.mkdir(parents=True, exist_ok=True)
     train_dir = dataset_dir / "train"
     test_dir = dataset_dir / "test"
     train_dir.mkdir(parents=True, exist_ok=True)
     test_dir.mkdir(parents=True, exist_ok=True)
+    # Do not mix a new randomized split with an earlier run's images.
+    if any(train_dir.iterdir()) or any(test_dir.iterdir()):
+        raise FileExistsError("Dataset output is not empty. Set dataset_dir to a new output directory before generating.")
 
     if temp_compile_dir.exists():
         shutil.rmtree(temp_compile_dir, ignore_errors=True)
@@ -238,13 +270,11 @@ def generate_dataset():
         shutil.copytree(source_dir / "Figures", temp_compile_dir / "Figures", dirs_exist_ok=True)
     except Exception:
         pass
-    if fancyhdr_path.exists():
-        try:
-            shutil.copy(fancyhdr_path, temp_compile_dir / "fancyhdr.sty")
-        except Exception:
-            pass
+    # Use the installed fancyhdr package. The repository's old mock package
+    # cannot parse paragraph-containing footers or first-page style definitions.
 
     # Load text resources
+    shutil.copytree(source_dir / "Text", temp_compile_dir / "Text", dirs_exist_ok=True)
     paragraphs = load_lines(text_paragraph_path)
     subtitles = load_lines(text_subtitle_path)
 
@@ -325,10 +355,25 @@ def generate_dataset():
         latex, tokens, attributes = generate_combined_doc(paragraphs=paragraphs, subtitles=extended_subtitles, khmer_lunar_dates=khmer_lunar_dates, solar_dates=solar_dates)
         jobs.append((stem, latex, tokens, attributes, "combined", para))
 
+    # Imported templates retain their structured body and institution assets.
+    for name in LAYOUTS:
+        template = (template_dir / f"{name}_Layout.tex").read_text(encoding="utf-8")
+        for idx in range(imported_doc):
+            stem = f"sample_{name.lower()}_{idx:03d}"
+            latex, tokens, attributes = generate_imported_doc(
+                template, source_dir, khmer_lunar_dates, solar_dates
+            )
+            jobs.append((stem, latex, tokens, attributes, name.lower(), ""))
+
+    # Append vocabulary entries deterministically; existing IDs never move.
+    for token in sorted({token for job in jobs for token in job[2]} - token_to_index.keys()):
+        token_to_index[token] = max(token_to_index.values(), default=-1) + 1
+
     # Split: 80% train, 20% test per layout group
     train_records = []
     test_records = []
     groups = {"itc": [], "mptc": [], "num": [], "table": [], "combined": []}
+    groups.update({name.lower(): [] for name in LAYOUTS})
     for job in jobs:
         groups[job[4]].append(job)
 
@@ -366,6 +411,10 @@ def generate_dataset():
                     "attributes": padded_attrs,
                     "length": len(token_ids)
                 }
+                if isinstance(success, list):
+                    rec["pages"] = success
+                if any(stem.startswith(f"sample_{name.lower()}_") for name in LAYOUTS):
+                    rec["annotation_format"] = "latex-source-v1"
                 if is_train:
                     train_records.append(rec)
                 else:
@@ -388,4 +437,18 @@ def generate_dataset():
     print(f"Done! Successfully generated {len(train_records)} train and {len(test_records)} test samples.", flush=True)
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generate Khmer document images and LaTeX sequence labels")
+    parser.add_argument("--output", type=Path, default=dataset_dir,
+                        help="New or empty output directory (existing datasets are protected)")
+    parser.add_argument("--samples-per-layout", type=int, default=None)
+    parser.add_argument("--seed", type=int, default=None)
+    args = parser.parse_args()
+    if args.samples_per_layout is not None:
+        if args.samples_per_layout < 5:
+            parser.error("Use at least 5 samples per layout for the 80/20 split")
+        itc_doc = mptc_doc = num_doc = table_doc = combined_doc = imported_doc = args.samples_per_layout
+        total_doc = (5 + len(LAYOUTS)) * args.samples_per_layout
+    if args.seed is not None:
+        random.seed(args.seed)
+    dataset_dir = args.output.resolve()
     generate_dataset()
